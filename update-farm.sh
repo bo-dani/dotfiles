@@ -6,6 +6,11 @@ PACKAGES=(
     xorg
     feh
     i3
+    picom
+    polybar
+    polybar-forecast
+    neofetch
+    alacritty
 )
 
 for PKG in ${PACKAGES[@]}; do
