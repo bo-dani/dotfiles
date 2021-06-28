@@ -1,0 +1,10 @@
+#!/bin/sh
+sleep 1
+
+num_files_landscape=`ls ~/Pictures | wc -l`
+
+random_landscape=`shuf -i 1-${num_files_landscape} -n 1`
+
+wallpaper_landscape=~/Pictures/background_${random_landscape}.jpg
+
+feh --no-fehbg --bg-scale ${wallpaper_landscape} --bg-scale ${wallpaper_portrait}
