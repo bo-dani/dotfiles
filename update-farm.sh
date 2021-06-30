@@ -11,6 +11,7 @@ PACKAGES=(
     polybar-forecast
     neofetch
     alacritty
+    xbindkeys
 )
 
 for PKG in ${PACKAGES[@]}; do
