@@ -14,7 +14,7 @@ PACKAGES=(
 )
 
 for PKG in ${PACKAGES[@]}; do
-    CONFLICTS=$(stow --no --verbose $PKG 2>&1 | awk '/\* existing target is/ {print $NF}')
+    CONFLICTS=$(stow -t ~ --no --verbose $PKG 2>&1 | awk '/\* existing target is/ {print $NF}')
     for filename in ${CONFLICTS[@]}; do
         if [[ -f $HOME/$filename || -L $HOME/$filename ]]; then
             echo "DELETE: $filename"

@@ -183,8 +183,8 @@ alias gcm='git commit -m'
 alias gcam='git commit -am'
 alias gsuir='git submodule update --init --recursive'
 alias gsur='git submodule update --recursive'
-alias gai='git add -i'
 alias gaa='git add .'
+alias ga='git add'
 alias gnah='git restore .'
 alias gpush='git push'
 alias gpull='git pull'
@@ -196,5 +196,26 @@ alias gl="git log --graph --abbrev-commit --decorate --format=format:'%C(bold bl
 ###########################################
 neofetch
 
+###########################################
+####              FORGIT               ####
+###########################################
+source $HOME/repos/forgit/forgit.plugin.zsh
 
+forgit_log=glo
+forgit_diff=gd
+forgit_add=gai
+forgit_reset_head=grh
+forgit_ignore=gi
+forgit_checkout_file=gcf
+forgit_checkout_branch=gcb
+forgit_checkout_commit=gco
+forgit_clean=gclean
+forgit_stash_show=gss
+forgit_cherry_pick=gcp
+forgit_rebase=grb
+forgit_fixup=gfu
+
+###########################################
+####             STARSHIP              ####
+###########################################
 eval "$(starship init zsh)"
