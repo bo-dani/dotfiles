@@ -12,6 +12,7 @@ PACKAGES=(
     neofetch
     alacritty
     xbindkeys
+    dunst
 )
 
 for PKG in ${PACKAGES[@]}; do
