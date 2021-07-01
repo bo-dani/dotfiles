@@ -13,6 +13,7 @@ PACKAGES=(
     alacritty
     xbindkeys
     dunst
+    xinitrc
 )
 
 for PKG in ${PACKAGES[@]}; do
