@@ -13,8 +13,6 @@ DEFAULT_SESSION='i3 --shmlog-size 0'
 
 # merge in defaults and keymaps
 
-xbindkeys
-
 if [ -f $sysresources ]; then
     xrdb -merge $sysresources
 fi
@@ -66,3 +64,4 @@ get_session(){
 }
 
 exec $(get_session "$1")
+exec xbindkeys
