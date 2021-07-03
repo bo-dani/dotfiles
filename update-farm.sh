@@ -14,6 +14,7 @@ PACKAGES=(
     xbindkeys
     dunst
     xinitrc
+    xprofile
 )
 
 for PKG in ${PACKAGES[@]}; do
