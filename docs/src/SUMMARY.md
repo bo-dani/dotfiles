@@ -5,3 +5,5 @@
 - [Fonts](./fonts.md)
 - [Notifications](./notifications.md)
 - [Patching dmenu](./patching-dmenu.md)
+- [zsh](./zsh.md)
+- [Neovim](./neovim.md)
