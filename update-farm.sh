@@ -15,6 +15,7 @@ PACKAGES=(
     dunst
     xinitrc
     xprofile
+    conky
 )
 
 for PKG in ${PACKAGES[@]}; do

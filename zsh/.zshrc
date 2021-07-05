@@ -3,6 +3,8 @@
 ###########################################
 neofetch
 
+EDITOR=nvim
+
 # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
 # Initialization code that may require console input (password prompts, [y/n]
 # confirmations, etc.) must go above this block; everything else may go below.
@@ -71,9 +73,6 @@ ZSH_THEME="agnoster"
 # see 'man strftime' for details.
 # HIST_STAMPS="mm/dd/yyyy"
 
-# Would you like to use another custom folder than $ZSH/custom?
-# ZSH_CUSTOM=/path/to/new-custom-folder
-
 # Which plugins would you like to load?
 # Standard plugins can be found in $ZSH/plugins/
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
@@ -105,14 +104,26 @@ export PATH="$HOME/.cargo/bin:$PATH"
 ####            FUNCTIONS              ####
 ###########################################
 
-# fzd
-fcd() {
+# Go to folder
+goto() {
 	local dir
 
-	dir=$(fd . $HOME --color=always --type=directory --hidden --exclude 'aur' --exclude 'Android' --exclude 'dotfiles' | \
+	dir=$(fd . $HOME --color=always --type=directory --hidden --exclude 'dotfiles' | \
 		fzf -i --ansi --border --preview 'exa -al --icons --color=always --group-directories-first {}')
 
 	cd "$dir"
+}
+
+# Open file with code
+ofc() { 
+	fd . $HOME --color=always --type=file | \
+		fzf -i --ansi --border --preview 'bat --color=always {}' | xargs -ro code
+}
+
+# Open folder with code
+odc() {
+	fd . $HOME --color=always --type=directory | \
+		fzf -i --ansi --border --preview 'exa -al --icons --color=always --group-directories-first {}' | xargs -ro code
 }
 
 # Install package
