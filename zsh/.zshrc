@@ -12,9 +12,6 @@ if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]
   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
 
-# Use bat for the man pages.
-export MANPAGER="sh -c 'col -bx | bat -l man -p'"
-
 # Path to your oh-my-zsh installation.
 export ZSH="/home/dma/.oh-my-zsh"
 
@@ -103,6 +100,9 @@ source $ZSH/oh-my-zsh.sh
 
 export PATH="$HOME/.cargo/bin:$PATH"
 
+# Use bat for the man pages.
+export MANPAGER="sh -c 'col -bx | bat -l man -p'"
+
 ###########################################
 ####            FUNCTIONS              ####
 ###########################################
@@ -184,6 +184,9 @@ alias gpush='git push'
 alias gpull='git pull'
 alias gfa='git fetch --all'
 alias gl="git log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold cyan)%aD%C(reset) %C(bold green)(%ar)%C(reset)%C(bold yellow)%d%C(reset)%n''          %C(white)%s%C(reset) %C(dim white)- %an%C(reset)' --all"
+
+alias mdb="mdbook build"
+alias mds="mdbook serve"
 
 ###########################################
 ####              FORGIT               ####

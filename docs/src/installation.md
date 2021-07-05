@@ -2,13 +2,15 @@
 
 ## Arch
 
-Follow official wiki.
+Follow official [wiki](https://wiki.archlinux.org/title/Installation_guide).
 
 ## Manjaro
 
-Follow installation guide.
+Follow installation guide provided in the live installation media.
 
 ### Drivers
+
+With Manjaro everything should be up and running out of the box. However, in an HP laptop I found that the wireless interface wasn't showing up.
 
 #### WiFi
 
