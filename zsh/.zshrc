@@ -98,8 +98,6 @@ source $ZSH/oh-my-zsh.sh
 
 # User configuration
 
-export PATH="$HOME/.cargo/bin:$PATH"
-
 # Use bat for the man pages.
 export MANPAGER="sh -c 'col -bx | bat -l man -p'"
 
