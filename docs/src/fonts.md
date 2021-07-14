@@ -11,3 +11,10 @@ $ fc-list
 ```
 
 ## Preview a font
+
+
+## VSCode
+
+Search for `font` and set the following if `Cascadia` and `Powerlevel10k` are installed:
+
+`'Cascadia Code', 'MesloLGS NF', monospace, 'Droid Sans Fallback'`
