@@ -117,13 +117,23 @@ goto() {
 
 # Open file with code
 ofc() { 
-	fd . $HOME --color=always --type=file | \
+	fd . $HOME --color=always --type=file --hidden --exclude=.cargo --exclude=opt --exclude=.cache | \
 		fzf -i --ansi --border --preview 'bat --color=always {}' | xargs -ro code
+}
+
+of() {
+	fd . $HOME --color=always --type=file --hidden --exclude=.cargo --exclude=opt --exclude=.cache | \
+		fzf -i --ansi --border --preview 'bat --color=always {}' | xargs -ro nvim
+}
+
+ows() {
+	fd . $HOME/repos --color=always --type=file | rg .code-workspace | \
+		fzf -i --ansi --border --preview 'bat --color=always {}' | xargs -ro code	
 }
 
 # Open folder with code
 odc() {
-	fd . $HOME --color=always --type=directory | \
+	fd . $HOME/repos --color=always --type=directory | \
 		fzf -i --ansi --border --preview 'exa -al --icons --color=always --group-directories-first {}' | xargs -ro code
 }
 
