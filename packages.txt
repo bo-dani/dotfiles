@@ -20,7 +20,6 @@ btrfs-progs
 bzip2
 clang
 clipit
-code
 conky-manager
 coreutils
 cpupower
@@ -172,6 +171,7 @@ reiserfsprogs
 ripgrep
 rsync
 rtl8821ce-dkms-git
+ruby
 s-nail
 sbxkb
 screenfetch
@@ -210,6 +210,8 @@ util-linux
 vi
 viewnior
 vim
+visual-studio-code-bin
+vlc
 vulkan-intel
 vulkan-radeon
 w3m
