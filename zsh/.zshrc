@@ -181,6 +181,14 @@ ex() {
   fi
 }
 
+function gcm() {
+	git commit -m "$@"
+}
+
+function gcam() {
+	git commit -am "$@"
+}
+
 ###########################################
 ####             ALIASES               ####
 ###########################################
@@ -205,8 +213,6 @@ alias gs='git status'
 alias gb='git branch'
 alias gch='git checkout'
 alias gm='git merge --no-ff'
-alias gcm='git commit -m'
-alias gcam='git commit -am'
 alias gsuir='git submodule update --init --recursive'
 alias gsur='git submodule update --recursive'
 alias gaa='git add .'
@@ -219,6 +225,8 @@ alias gl="git log --graph --abbrev-commit --decorate --format=format:'%C(bold bl
 
 alias mdb="mdbook build"
 alias mds="mdbook serve"
+
+alias pof="shutdown now"
 
 ###########################################
 ####              FORGIT               ####
