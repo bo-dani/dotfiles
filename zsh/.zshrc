@@ -79,7 +79,6 @@ ZSH_THEME="agnoster"
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(
-	git 
 	cargo 
 	command-not-found 
 	fd 
@@ -181,11 +180,11 @@ ex() {
   fi
 }
 
-function gcm() {
+gcm() {
 	git commit -m "$*"
 }
 
-function gcam() {
+gcam() {
 	git commit -am "$*"
 }
 
@@ -216,7 +215,6 @@ alias gm='git merge --no-ff'
 alias gsuir='git submodule update --init --recursive'
 alias gsur='git submodule update --recursive'
 alias gaa='git add .'
-alias ga='git add'
 alias gnah='git restore .'
 alias gpush='git push'
 alias gpull='git pull'
@@ -235,7 +233,7 @@ source $HOME/repos/forgit/forgit.plugin.zsh
 
 forgit_log=glo
 forgit_diff=gd
-forgit_add=gai
+forgit_add=ga
 forgit_reset_head=grh
 forgit_ignore=gi
 forgit_checkout_file=gcf
