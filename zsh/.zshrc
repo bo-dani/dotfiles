@@ -182,11 +182,11 @@ ex() {
 }
 
 function gcm() {
-	git commit -m "$@"
+	git commit -m "$*"
 }
 
 function gcam() {
-	git commit -am "$@"
+	git commit -am "$*"
 }
 
 ###########################################

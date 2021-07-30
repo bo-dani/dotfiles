@@ -16,6 +16,7 @@ PACKAGES=(
     xinitrc
     xprofile
     conky
+    nvim
 )
 
 for PKG in ${PACKAGES[@]}; do
