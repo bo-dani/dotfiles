@@ -18,6 +18,7 @@ bless
 bmenu
 btrfs-progs
 bzip2
+ccls
 clang
 clipit
 conky-manager
@@ -36,6 +37,7 @@ dmidecode
 dmraid
 dnsmasq
 dosfstools
+doxygen
 e2fsprogs
 ecryptfs-utils
 efibootmgr
@@ -60,6 +62,7 @@ gitkraken
 glibc
 gnome-keyring
 google-calendar-nativefier
+graphviz
 grep
 grub
 grub-theme-manjaro-dev
@@ -157,6 +160,7 @@ pcmanfm
 perl
 perl-file-mimeinfo
 pkgconf
+plantuml
 polkit-gnome
 polybar
 powertop

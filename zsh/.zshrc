@@ -209,6 +209,7 @@ alias mkdir='mkdir -pv'
 alias upgrade='sudo pacman -Syu; yay -Syu'
 
 alias gs='git status'
+alias gds='git diff --staged'
 alias gb='git branch'
 alias gch='git checkout'
 alias gm='git merge --no-ff'
