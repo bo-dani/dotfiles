@@ -227,6 +227,9 @@ alias mds="mdbook serve"
 
 alias pof="shutdown now"
 
+alias pipins="pip install"
+alias pipupg="pip install --upgrade pip"
+
 ###########################################
 ####              FORGIT               ####
 ###########################################
