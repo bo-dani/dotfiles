@@ -79,13 +79,11 @@ ZSH_THEME="agnoster"
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(
-	cargo 
 	command-not-found 
 	fd 
 	fzf 
 	pip 
 	rust 
-	rustup
 	sudo 
 	zsh-interactive-cd 
 	zsh-autosuggestions
