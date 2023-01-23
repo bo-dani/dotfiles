@@ -7,7 +7,9 @@ alsa-plugins
 alsa-utils
 android-studio
 arandr
+arm-none-eabi-gcc
 arm-none-eabi-gdb
+arm-none-eabi-newlib
 autoconf
 automake
 avahi
@@ -29,7 +31,6 @@ clipit
 conky-manager
 coreutils
 cpupower
-crda
 cronie
 cryptsetup
 cutecom
@@ -163,6 +164,7 @@ npm
 nss-mdns
 ntfs-3g
 ntp
+openocd
 openresolv
 openssh
 os-prober
@@ -186,7 +188,7 @@ psmisc
 pulseaudio
 pulseaudio-bluetooth
 python-pip
-qemu
+qemu-desktop
 qt5-styleplugins
 qt5ct
 ranger
@@ -207,6 +209,7 @@ spectre-meltdown-checker
 speedtest-cli
 spotify
 squashfs-tools
+stlink
 stow
 sublime-text-4
 sudo

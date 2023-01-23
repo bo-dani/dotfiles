@@ -175,7 +175,7 @@ bindsym $mod+Shift+8 move container to workspace $ws8; workspace $ws8
 for_window [class="firefox"] move container to workspace $ws2
 for_window [class="Code"] move container to workspace $ws3
 for_window [class="code"] move container to workspace $ws3
-for_window [class="Thunderbird"] move container to workspace $ws4
+for_window [class="thunderbird"] move container to workspace $ws4
 for_window [class="Spotify"] move container to workspace $ws5
 for_window [class="TelegramDesktop"] move container to workspace $ws6
 
