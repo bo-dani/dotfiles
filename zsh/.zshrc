@@ -1,10 +1,3 @@
-###########################################
-####             NEOFETCH              ####
-###########################################
-neofetch
-
-EDITOR=nvim
-
 # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
 # Initialization code that may require console input (password prompts, [y/n]
 # confirmations, etc.) must go above this block; everything else may go below.
@@ -12,8 +5,21 @@ if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]
   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
 
+# GitHub Token
+export GITHUB_TOKEN="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"
+
 # Path to your oh-my-zsh installation.
-export ZSH="/home/dma/.oh-my-zsh"
+export ZSH="$HOME/.oh-my-zsh"
+
+# Web browser
+export BROWSER=""
+
+# Repos folder
+export REPOS="$HOME/repos"
+export FARADAY_PATH="$HOME/repos/faraday"
+
+# PYTHONPATH
+export PYTHONPATH=":$REPOS/faraday-tools"
 
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time oh-my-zsh is loaded, in which case,
@@ -79,15 +85,17 @@ ZSH_THEME="agnoster"
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(
-	command-not-found 
-	fd 
-	fzf 
-	pip 
-	rust 
-	sudo 
-	zsh-interactive-cd 
+	command-not-found
+	fd
+	fzf
+	pip
+	rust
+	sudo
+	forgit
+	zsh-interactive-cd
 	zsh-autosuggestions
 	zsh-syntax-highlighting
+	zsh-autocomplete
 	themes
 )
 
@@ -113,30 +121,30 @@ goto() {
 }
 
 # Open file with code
-ofc() { 
+ofc() {
 	fd . $HOME --color=always --type=file --hidden --exclude=.cargo --exclude=opt --exclude=.cache | \
 		fzf -i --ansi --border --preview 'bat --color=always {}' | xargs -ro code
 }
 
 of() {
 	fd . $HOME --color=always --type=file --hidden --exclude=.cargo --exclude=opt --exclude=.cache | \
-		fzf -i --ansi --border --preview 'bat --color=always {}' | xargs -ro nvim
+		fzf -i --ansi --border --preview 'bat --color=always {}' | xargs -ro subl
 }
 
 ows() {
-	fd . $HOME/repos --color=always --type=file | rg .code-workspace | \
-		fzf -i --ansi --border --preview 'bat --color=always {}' | xargs -ro code	
+	fd . $REPOS --color=always --type=file | rg .code-workspace | \
+		fzf -i --ansi --border --preview 'bat --color=always {}' | xargs -ro code
 }
 
 # Open folder with code
 odc() {
-	fd . $HOME/repos --color=always --type=directory | \
+	fd . $REPOS --color=always --type=directory | \
 		fzf -i --ansi --border --preview 'exa -al --icons --color=always --group-directories-first {}' | xargs -ro code
 }
 
 # Install package
 pacins() {
-	pacman -Slq | fzf --border --multi --preview 'pacman -Si {1}' | xargs -ro sudo pacman -S 
+	pacman -Slq | fzf --border --multi --preview 'pacman -Si {1}' | xargs -ro sudo pacman -S
 }
 
 # Install package from AUR
@@ -192,6 +200,13 @@ gcam() {
 
 alias ..='cd ..'
 
+alias fa='cd $FARADAY_PATH'
+alias fat='cd $REPOS/faraday-tools && source venv/bin/activate'
+alias fas='cd $REPOS/faraday-autotest-service && source venv/bin/activate'
+alias serve='cd $REPOS/faraday-autotest-service && source venv/bin/activate && python src/web_service.py'
+
+# TODO alias for syslog
+
 alias ls='exa --icons --color=always --group-directories-first'
 alias la='exa -a --icons --color=always --group-directories-first'
 alias ll='exa -la --icons --color=always --group-directories-first'
@@ -231,7 +246,6 @@ alias pipupg="pip install --upgrade pip"
 ###########################################
 ####              FORGIT               ####
 ###########################################
-source $HOME/repos/forgit/forgit.plugin.zsh
 
 forgit_log=glo
 forgit_diff=gd
@@ -251,3 +265,4 @@ source /usr/share/zsh-theme-powerlevel10k/powerlevel10k.zsh-theme
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+[ -f /opt/miniconda3/etc/profile.d/conda.sh ] && source /opt/miniconda3/etc/profile.d/conda.sh

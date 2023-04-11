@@ -5,6 +5,8 @@
 [[ $- != *i* ]] && return
 
 export PATH="$HOME/.cargo/bin:$HOME/.gem/ruby/2.7.0/bin:$PATH"
+export GITHUB_TOKEN="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"
+export FARADAY_PATH="$HOME/repos/faraday"
 
 colors() {
 	local fgc bgc vals seq0

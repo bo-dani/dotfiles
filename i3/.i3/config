@@ -33,13 +33,20 @@ bindsym $mod+Return exec alacritty
 bindsym $mod+Shift+q kill
 
 # start program launcher
-bindsym $mod+d exec --no-startup-id dmenu_run -c -l 20
+bindsym $mod+d exec --no-startup-id dmenu_recency
+
+# launch categorized menu
+bindsym $mod+z exec --no-startup-id morc_menu
 
 ################################################################################################
 ## sound-section - DO NOT EDIT if you wish to automatically upgrade Alsa -> Pulseaudio later! ##
 ################################################################################################
 
+exec --no-startup-id volumeicon
 bindsym $mod+Ctrl+m exec terminal -e 'alsamixer'
+#exec --no-startup-id pulseaudio
+#exec --no-startup-id pa-applet
+#bindsym $mod+Ctrl+m exec pavucontrol
 
 ################################################################################################
 
@@ -49,13 +56,18 @@ bindsym $mod+Ctrl+m exec terminal -e 'alsamixer'
 
 # Start Applications
 bindsym $mod+Ctrl+b exec terminal -e 'bmenu'
-bindsym $mod+F3 exec pcmanfm
-# bindsym $mod+F3 exec ranger
+bindsym $mod+F2 exec google-chrome-stable
+# bindsym $mod+F3 exec pcmanfm
+bindsym $mod+F3 exec ranger
 bindsym $mod+Shift+F3 exec pcmanfm_pkexec
+bindsym $mod+F5 exec terminal -e 'mocp'
+bindsym $mod+t exec --no-startup-id pkill picom
+bindsym $mod+Ctrl+t exec --no-startup-id picom -b
 bindsym $mod+Shift+d --release exec "killall dunst; exec notify-send 'restart dunst'"
 bindsym Print exec --no-startup-id i3-scrot
 bindsym $mod+Print --release exec --no-startup-id i3-scrot -w
 bindsym $mod+Shift+Print --release exec --no-startup-id i3-scrot -s
+bindsym $mod+Shift+h exec xdg-open /usr/share/doc/manjaro/i3_help.pdf
 bindsym $mod+Ctrl+x --release exec --no-startup-id xkill
 
 # focus_follows_mouse no
@@ -85,7 +97,7 @@ bindsym $mod+Shift+Up move up
 bindsym $mod+Shift+Right move right
 
 # workspace back and forth (with/without active container)
-workspace_auto_back_and_forth no
+workspace_auto_back_and_forth yes
 bindsym $mod+b workspace back_and_forth
 bindsym $mod+Shift+b move container to workspace back_and_forth; workspace back_and_forth
 
@@ -124,9 +136,6 @@ bindsym $mod+minus scratchpad show
 #navigate workspaces next / previous
 bindsym $mod+Ctrl+Right workspace next
 bindsym $mod+Ctrl+Left workspace prev
-
-# back and forth behaviour
-bindsym $mod+Tab workspace back_and_forth
 
 # Workspace names
 # to display names or symbols instead of plain workspace numbers you can use
@@ -172,12 +181,10 @@ bindsym $mod+Shift+7 move container to workspace $ws7; workspace $ws7
 bindsym $mod+Shift+8 move container to workspace $ws8; workspace $ws8
 
 # Open applications on specific workspaces
-for_window [class="firefox"] move container to workspace $ws2
-for_window [class="Code"] move container to workspace $ws3
-for_window [class="code"] move container to workspace $ws3
-for_window [class="thunderbird"] move container to workspace $ws4
-for_window [class="Spotify"] move container to workspace $ws5
-for_window [class="TelegramDesktop"] move container to workspace $ws6
+# assign [class="Thunderbird"] $ws1
+# assign [class="Pale moon"] $ws2
+# assign [class="Pcmanfm"] $ws3
+# assign [class="Skype"] $ws5
 
 # Open specific applications in floating mode
 for_window [title="alsamixer"] floating enable border pixel 1
@@ -266,14 +273,20 @@ bindsym $mod+9 exec --no-startup-id blurlock
 
 # Autostart applications
 exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
-exec_always --no-startup-id ~/.config/polybar/launch.sh
-exec --no-startup-id ~/.fehbg; sleep 1; picom
+# exec --no-startup-id nitrogen --restore; sleep 1; picom -b
 exec --no-startup-id nm-applet
 exec --no-startup-id xfce4-power-manager
+exec --no-startup-id pamac-tray
+exec --no-startup-id clipit
+exec --no-startup-id sleep 1 && ./.fehbg --bg-fill wallpapers/background_4.jpg --bg-fill wallpapers/background_4.jpg --bg-fill wallpapers/background_4.jpg --bg-fill wallpapers/background_4.jpg
+# exec --no-startup-id blueman-applet
+# exec_always --no-startup-id sbxkb
 exec --no-startup-id xautolock -time 10 -locker blurlock
+exec_always --no-startup-id ff-theme-util
 exec_always --no-startup-id fix_xcursor
-exec --no-startup-id spotify
-exec --no-startup-id thunderbird 
+exec --no-startup-id xrandr --output eDP-1 --primary --mode 1920x1080 --output DP-1-0.2 --mode 3840x2160 --rate 60.00 --right-of eDP-1 --output DP-1-0.1 --mode 1920x1080 --rotate left --right-of DP-1-0.2 --output HDMI-1-0 --mode 1920x1080 --rotate left --right-of DP-1-0.1
+exec --no-startup-id ~/.config/polybar/launch.sh
+exec --no-startup-id nitrogen --restore; sleep 1; picom -b
 
 # Color palette used for the terminal ( ~/.Xresources file )
 # Colors are gathered based on the documentation:
@@ -281,7 +294,7 @@ exec --no-startup-id thunderbird
 # Change the variable name at the place you want to match the color
 # of your terminal like this:
 # [example]
-# If you want your bar to have the same background color as your 
+# If you want your bar to have the same background color as your
 # terminal background change the line 362 from:
 # background #14191D
 # to:
@@ -312,7 +325,7 @@ set_from_resource $term_color15    color15
   client.focused_inactive #2F3D44 #2F3D44 #1ABC9C #454948
   client.unfocused        #2F3D44 #2F3D44 #1ABC9C #454948
   client.urgent           #CB4B16 #FDF6E3 #1ABC9C #268BD2
-  client.placeholder      #000000 #0c0c0c #ffffff #000000 
+  client.placeholder      #000000 #0c0c0c #ffffff #000000
 
   client.background       #2B2C2B
 
@@ -330,9 +343,9 @@ gaps outer -2
 # gaps outer all plus 5
 
 # Smart gaps (gaps used if only more than one container on the workspace)
-#smart_gaps on
+smart_gaps on
 
-# Smart borders (draw borders around container only if it is not the only container on this workspace) 
+# Smart borders (draw borders around container only if it is not the only container on this workspace)
 # on|no_gaps (on=always activate and no_gaps=only activate if the gap size to the edge of the screen is 0)
 smart_borders on
 
