@@ -278,13 +278,13 @@ exec --no-startup-id nm-applet
 exec --no-startup-id xfce4-power-manager
 exec --no-startup-id pamac-tray
 exec --no-startup-id clipit
-exec --no-startup-id sleep 1 && ./.fehbg --bg-fill wallpapers/background_4.jpg --bg-fill wallpapers/background_4.jpg --bg-fill wallpapers/background_4.jpg --bg-fill wallpapers/background_4.jpg
+exec --no-startup-id sleep 1 && ./.fehbg
 # exec --no-startup-id blueman-applet
 # exec_always --no-startup-id sbxkb
 exec --no-startup-id xautolock -time 10 -locker blurlock
 exec_always --no-startup-id ff-theme-util
 exec_always --no-startup-id fix_xcursor
-exec --no-startup-id xrandr --output eDP-1 --primary --mode 1920x1080 --output DP-1-0.2 --mode 3840x2160 --rate 60.00 --right-of eDP-1 --output DP-1-0.1 --mode 1920x1080 --rotate left --right-of DP-1-0.2 --output HDMI-1-0 --mode 1920x1080 --rotate left --right-of DP-1-0.1
+exec --no-startup-id xrandr --output eDP-1 --primary --mode 1920x1080 --output DP-1-0.2 --mode 1920x1200 --right-of eDP-1 --output DP-1-0.1 --mode 1920x1080 --rotate left --right-of DP-1-0.2 --output HDMI-1-0 --mode 1920x1080 --rotate left --right-of DP-1-0.1
 exec --no-startup-id ~/.config/polybar/launch.sh
 exec --no-startup-id nitrogen --restore; sleep 1; picom -b
 
