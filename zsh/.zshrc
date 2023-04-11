@@ -7,6 +7,7 @@ fi
 
 # GitHub Token
 export GITHUB_TOKEN="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"
+export PERSONAL_GITHUB_TOKEN="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"
 
 # Path to your oh-my-zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
