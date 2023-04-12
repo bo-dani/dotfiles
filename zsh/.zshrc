@@ -6,7 +6,7 @@ if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]
 fi
 
 # GitHub Token
-export GITHUB_TOKEN="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"
+export GITHUB_TOKEN="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"
 export PERSONAL_GITHUB_TOKEN="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"
 
 # Path to your oh-my-zsh installation.
@@ -96,7 +96,7 @@ plugins=(
 	zsh-interactive-cd
 	zsh-autosuggestions
 	zsh-syntax-highlighting
-	zsh-autocomplete
+	# zsh-autocomplete
 	themes
 )
 
