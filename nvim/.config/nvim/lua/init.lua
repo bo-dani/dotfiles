@@ -1,10 +1,13 @@
-require("lualine")
-
 vim.opt.hidden = true
 vim.opt.grepprg = "rg --vimgrep --smart-case --follow"
 
 vim.keymap.set("n", " ", "<Nop>", { silent = true, remap = false })
 vim.g.mapleader = " "
+
+vim.keymap.set("n", "<Up>", "<Nop>", { silent = True, remap = false })
+vim.keymap.set("n", "<Down>", "<Nop>", { silent = True, remap = false })
+vim.keymap.set("n", "<Right>", "<Nop>", { silent = True, remap = false })
+vim.keymap.set("n", "<Left>", "<Nop>", { silent = True, remap = false })
 
 -- Line numbers
 vim.opt.relativenumber = true
@@ -22,9 +25,14 @@ Plug 'nvim-tree/nvim-web-devicons'
 Plug 'nvim-treesitter/nvim-treesitter'
 Plug('nvim-telescope/telescope-fzf-native.nvim', { ['do'] = 'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release' })
 Plug 'nvim-lualine/lualine.nvim'
+Plug 'lukas-reineke/indent-blankline.nvim'
+Plug 'neovim/nvim-lspconfig'
 vim.call('plug#end')
 
 require('telescope').load_extension('fzf')
+require('lualine-config')
+require('ibl').setup()
+require('lspconfig').clangd.setup{}
 
 vim.cmd('silent! colorscheme tokyonight')
 
