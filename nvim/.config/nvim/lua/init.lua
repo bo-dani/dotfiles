@@ -9,6 +9,9 @@ vim.keymap.set("n", "<Down>", "<Nop>", { silent = True, remap = false })
 vim.keymap.set("n", "<Right>", "<Nop>", { silent = True, remap = false })
 vim.keymap.set("n", "<Left>", "<Nop>", { silent = True, remap = false })
 
+-- Cancel search highlighting
+vim.keymap.set("n", "<esc><esc>", ":noh<CR><esc>", { noremap = true, silent = true })
+
 -- Line numbers
 vim.opt.relativenumber = true
 vim.opt.number = true
@@ -17,8 +20,10 @@ vim.opt.number = true
 local Plug = vim.fn['plug#']
 
 vim.call('plug#begin')
+Plug 'Isrothy/neominimap.nvim'
 Plug 'tpope/vim-sensible'
 Plug 'nvim-lua/plenary.nvim'
+Plug 'lewis6991/gitsigns.nvim'
 Plug 'nvim-telescope/telescope.nvim'
 Plug 'folke/tokyonight.nvim'
 Plug 'nvim-tree/nvim-web-devicons'
@@ -33,6 +38,7 @@ require('telescope').load_extension('fzf')
 require('lualine-config')
 require('ibl').setup()
 require('lspconfig').clangd.setup{}
+require('gitsigns').setup()
 
 vim.cmd('silent! colorscheme tokyonight')
 
