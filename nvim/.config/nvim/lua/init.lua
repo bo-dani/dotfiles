@@ -1,6 +1,7 @@
 vim.opt.hidden = true
 vim.opt.grepprg = "rg --vimgrep --smart-case --follow"
 
+-- Space as mapleader
 vim.keymap.set("n", " ", "<Nop>", { silent = true, remap = false })
 vim.g.mapleader = " "
 
@@ -36,8 +37,8 @@ vim.call('plug#end')
 
 require('telescope').load_extension('fzf')
 require('lualine-config')
+require('lsp-config')
 require('ibl').setup()
-require('lspconfig').clangd.setup{}
 require('gitsigns').setup()
 
 vim.cmd('silent! colorscheme tokyonight')
