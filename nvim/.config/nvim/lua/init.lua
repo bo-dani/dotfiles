@@ -27,6 +27,16 @@ vim.api.nvim_create_autocmd("BufWritePre", {
   end
 })
 
+-- 4-space tabs
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = { "c", "cpp", "h" },
+  callback = function()
+    vim.bo.tabstop = 4 -- Number of spaces a <Tab> counts for
+    vim.bo.shiftwidth = 4 -- Number of spaces to use for each step of (auto)indent
+    vim.bo.expandtab = true -- Use spaces instead of tabs
+  end,
+})
+
 -- Plugins
 local Plug = vim.fn['plug#']
 
@@ -60,6 +70,8 @@ Plug 'windwp/nvim-autopairs'
 Plug 'RRethy/vim-illuminate'
 Plug 'numToStr/Comment.nvim'
 Plug 'danilamihailov/beacon.nvim'
+Plug 'folke/zen-mode.nvim'
+Plug 'nordtheme/vim'
 vim.call('plug#end')
 
 require('telescope').load_extension('fzf')
@@ -77,8 +89,8 @@ vim.cmd('silent! colorscheme onedark')
 -- Telescope
 local builtin = require('telescope.builtin')
 vim.keymap.set('n', '<leader>p', builtin.find_files, { silent = true, desc = "Find files" })
-vim.keymap.set('n', '<leader>f', builtin.live_grep, { silent = true, desc = "Search for a string in working directory" })
-vim.keymap.set('n', '<leader>ff', builtin.grep_string, { silent = true, desc = "Search for the string under the cursor in working directory" })
+vim.keymap.set('n', '<leader>s', builtin.live_grep, { silent = true, desc = "Search for a string in working directory" })
+vim.keymap.set('n', '<leader>ss', builtin.grep_string, { silent = true, desc = "Search for the string under the cursor in working directory" })
 vim.keymap.set('n', '<leader>b', builtin.buffers, { silent = true, })
 vim.keymap.set('n', '<leader>h', builtin.help_tags, { silent = true })
 
@@ -107,3 +119,7 @@ require('nvim-treesitter.configs').setup {
     max_file_lines = nil,
   }
 }
+
+-- Zenmode
+local zen = require('zen-mode')
+vim.keymap.set('n', '<leader>z', zen.toggle, { silent = true, desc = "Toggle Zen mode" })

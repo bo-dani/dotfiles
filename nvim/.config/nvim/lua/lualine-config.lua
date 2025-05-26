@@ -10,6 +10,10 @@ vim.keymap.set('n', '<leader>9', ':LualineBuffersJump 9<CR>')
 vim.keymap.set('n', '<leader>h', ':bprev<CR>')
 vim.keymap.set('n', '<leader>l', ':bnext<CR>')
 
+require('onedark').setup()
+
+local colors = require('onedark.colors')
+
 require('lualine').setup {
     options = {
         icons_enabled = true,
@@ -93,12 +97,16 @@ require('lualine').setup {
                 mode = 2, -- 0 buf name, 1 buf index, 2 name + index, 3 buf number, 4 name + number
                 max_length = vim.o.columns * 2 / 3,
                 symbols = {
-                    modified = ' ⚠', -- ' 💾', -- ' ●',
+                    modified = ' ●', -- ' 💾', -- ' ●',
                     alternate_file = '', -- '#'
                     directory = '',
                 },
                 component_separators = { left = '', right = ''}, --        
                 section_separators = { left = '', right = ''},
+                buffers_color = {
+                    active = { bg = colors.bg, fg = colors.white },
+                    inactive = { bg = colors.light_grey, fg = colors.bg },
+                },
             }
         },
         lualine_b = {''}, -- {'branch'},
