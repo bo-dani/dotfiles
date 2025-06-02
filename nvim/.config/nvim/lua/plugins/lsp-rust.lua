@@ -18,7 +18,6 @@ return {
             },
           },
         })
-        return true -- Skip default setup by lspconfig
       end,
     },
   },
