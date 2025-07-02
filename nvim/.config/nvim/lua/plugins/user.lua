@@ -8,10 +8,6 @@ return {
   { "tpope/vim-commentary" },
   { "nvim-lua/plenary.nvim" },
   { "lewis6991/gitsigns.nvim" },
-  { "ibhagwan/fzf-lua" },
-  { "folke/tokyonight.nvim" },
-  { "catppuccin/nvim" },
-  { "navarasu/onedark.nvim" },
   { "nvim-tree/nvim-web-devicons" },
   { "nvim-treesitter/nvim-treesitter" },
   { "nvim-lualine/lualine.nvim" },
@@ -25,6 +21,5 @@ return {
   { "numToStr/Comment.nvim" },
   { "danilamihailov/beacon.nvim" },
   { "folke/zen-mode.nvim" },
-  { "nordtheme/vim" },
-  { "navarasu/onedark.nvim" }
+  { "ThePrimeagen/vim-be-good" },
 }

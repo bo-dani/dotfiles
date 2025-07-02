@@ -13,6 +13,9 @@ vim.keymap.set("n", "<leader>l", ":bnext<CR>", { silent = true, desc = "Next buf
 local zen = require('zen-mode')
 vim.keymap.set('n', '<leader>z', zen.toggle, { silent = true, desc = "Toggle Zen mode" })
 
+-- jk as ESC 
+vim.keymap.set('i', 'kj', '<esc>', { silent = true, desc = "Remap ESC" })
+
 -- LSP
 vim.api.nvim_create_autocmd("LspAttach", {
   callback = function(args)

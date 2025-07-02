@@ -20,3 +20,5 @@ vim.opt.visualbell = true
 
 -- Add EOL when saving a buffer
 vim.opt.fixendofline = true
+
+vim.opt.laststatus = 2
