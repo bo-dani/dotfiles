@@ -9,6 +9,9 @@ return {
     opts.formatters_by_ft = vim.tbl_deep_extend("force", opts.formatters_by_ft or {}, {
       rust = { "rustfmt" },
     })
+    opts.formatters_by_ft = vim.tbl_deep_extend("force", opts.formatters_by_ft or {}, {
+      python = { "black" },
+    })
   end,
   keys = {
     {
