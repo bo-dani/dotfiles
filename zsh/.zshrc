@@ -5,15 +5,15 @@ if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]
   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
 
-# GitHub Token
-export GITHUB_TOKEN="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"
-export PERSONAL_GITHUB_TOKEN="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"
+source $HOME/.secrets
 
 # Path to your oh-my-zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
 
 # Web browser
 export BROWSER=""
+
+export EDITOR=nvim
 
 # Repos folder
 export REPOS="$HOME/repos"
@@ -23,7 +23,7 @@ export FARADAY_PATH="$HOME/repos/faraday"
 export PYTHONPATH="$PYTHONPATH:$REPOS/faraday-tools:$REPOS/faraday-tools/external/dtbt"
 
 # PATH
-export PATH="$PATH:$HOME/.local/bin"
+export PATH="$PATH:$HOME/.local/bin/:$HOME/.local/scripts/"
 
 export FZF_BASE="/usr/bin"
 
@@ -92,6 +92,10 @@ source $ZSH/oh-my-zsh.sh
 
 # User configuration
 
+bindkey '^I'   complete-word       # tab          | complete
+bindkey '^[[Z' autosuggest-accept  # shift + tab  | autosuggest
+bindkey -s ^f "tmux-sessionizer\n"
+
 # Use bat for the man pages.
 export MANPAGER="sh -c 'col -bx | bat -l man -p'"
 
@@ -109,58 +113,15 @@ goto() {
 	cd "$dir"
 }
 
-# Open file with code
-ofc() {
-	fd . $HOME --color=always --type=file --hidden --exclude=.cargo --exclude=opt --exclude=.cache | \
-		fzf -i --ansi --border --preview 'bat --color=always {}' | xargs -ro code
-}
-
-ff14() {
-  fd . --color=always --no-ignore --exclude de16 --exclude dongle --exclude earbuds --exclude="tests" --exclude=".build" --exclude=".cache" --exclude="external" --exclude="template" --exclude="libs" --type=file -e .c -e .h -X rg --color=always --line-number --no-heading --smart-case "${*:-}" \
-  | fzf -d':' --ansi --exact -i \
-    --preview "bat -p --color=always {1} --highlight-line {2}" \
-    --preview-window ~8,+{2}-5 \
-  | awk -F':' '{print $1}'
-}
-
-ff16c() {
-  fd . --color=always --no-ignore --exclude='*ab156*' --exclude='*ab16*' --exclude='*ab157*' --exclude dh14 --exclude '*headset*' --exclude '*earbuds*' --exclude="tests" --exclude=".build" --exclude=".cache" --exclude="external" --exclude="template" --exclude="libs" --type=file -e .c -e .h -X rg --color=always --line-number --no-heading --smart-case "${*:-}" \
-  | fzf -d':' --ansi --exact -i \
-    --preview "bat -p --color=always {1} --highlight-line {2}" \
-    --preview-window ~8,+{2}-5 \
-  | awk -F':' '{print $1 ":" $2}' \
-  | xargs -ro code --goto
-}
-
-
-ff16() {
-  fd . --color=always --no-ignore --exclude='*ab156*' --exclude='*ab16*' --exclude='*ab157*' --exclude dh14 --exclude '*headset*' --exclude '*dongle*' --exclude="tests" --exclude=".build" --exclude=".cache" --exclude="external" --exclude="template" --exclude="libs" --type=file -e .c -e .h -X rg --color=always --line-number --no-heading --smart-case "${*:-}" \
-  | fzf -d':' --ansi --exact -i \
-    --preview "bat -p --color=always {1} --highlight-line {2}" \
-    --preview-window ~8,+{2}-5 \
-  | awk -F':' '{print $1 ":" $2}' \
-  | xargs -ro code --goto
-}
-
 of() {
 	fd . $HOME --color=always --type=file --hidden --exclude=.cargo --exclude=opt --exclude=.cache | \
-		fzf -i --ansi --border --preview 'bat --color=always {}' | xargs -ro subl
-}
-
-ows() {
-	fd . $REPOS --color=always --type=file | rg .code-workspace | \
-		fzf -i --ansi --border --preview 'bat --color=always {}' | xargs -ro code
+		fzf -i --ansi --border --preview 'bat --color=always {}' | xargs -ro $EDITOR
 }
 
 # Open folder with code
 odc() {
 	fd . $REPOS --color=always --type=directory | \
-		fzf -i --ansi --border --preview 'exa -al --icons --color=always --group-directories-first {}' | xargs -ro code
-}
-
-# Remove package from AUR
-yarem() {
-	yay -Qq | fzf --border --multi --preview 'yay -Qi {1}' | xargs -ro sudo yay -Rns
+		fzf -i --ansi --border --preview 'exa -al --icons --color=always --group-directories-first {}' | xargs -ro $EDITOR
 }
 
 # ex - archive extractor
@@ -202,21 +163,36 @@ gcam() {
 b14() {
 	cd $REPOS/faraday
 	./faraday.py build --product dh14 --build mp1_right && ./faraday.py build --product dh14 --build mp1_left
+	sed -i 's/\/workspaces/\/home\/dama\/repos/g' .build/compile_commands.json
+	sed -i 's/-fno-tree-dominator-opts//' .build/compile_commands.json
 }
 
 b16() {
 	cd $REPOS/faraday
-	./faraday.py build --product de16 --build dv1
+	./faraday.py build --product de16 --build pv1
+	sed -i 's/\/workspaces/\/home\/dama\/repos/g' .build/compile_commands.json
+	sed -i 's/-fno-tree-dominator-opts//' .build/compile_commands.json
+}
+
+b16f() {
+	cd $REPOS/faraday
+	./faraday.py build --product de16 --build pv1 --factory
+	sed -i 's/\/workspaces/\/home\/dama\/repos/g' .build/compile_commands.json
+	sed -i 's/-fno-tree-dominator-opts//' .build/compile_commands.json
 }
 
 b16c() {
 	cd $REPOS/faraday
-	./faraday.py build --product de16-case --build dv1
+	./faraday.py build --product de16-case --build pv1
+	sed -i 's/\/workspaces/\/home\/dama\/repos/g' .build/compile_commands.json
+	sed -i 's/-fno-tree-dominator-opts//' .build/compile_commands.json
 }
 
 b14f() {
 	cd $REPOS/faraday
 	./faraday.py build --product dh14 --build mp1_right --factory && ./faraday.py build --product dh14 --build mp1_left --factory
+	sed -i 's/\/workspaces/\/home\/dama\/repos/g' .build/compile_commands.json
+	sed -i 's/-fno-tree-dominator-opts//' .build/compile_commands.json
 }
 
 f14() {
@@ -231,15 +207,23 @@ f16() {
 	cd $REPOS/faraday-tools
 	source venv/bin/activate
 	clear
-	python AirTools/flash.py -f $FARADAY_PATH/.build/de16/dv1 -p /dev/ttyUSBR && \
-		python AirTools/flash.py -f $FARADAY_PATH/.build/de16/dv1 -p /dev/ttyUSBL
+	python AirTools/flash.py -f $FARADAY_PATH/.build/de16/pv1 -p /dev/ttyUSBR && \
+		python AirTools/flash.py -f $FARADAY_PATH/.build/de16/pv1 -p /dev/ttyUSBL
+}
+
+f16f() {
+	cd $REPOS/faraday-tools
+	source venv/bin/activate
+	clear
+	python AirTools/flash.py -f $FARADAY_PATH/.build/de16/pv1_factory -p /dev/ttyUSBR && \
+		python AirTools/flash.py -f $FARADAY_PATH/.build/de16/pv1_factory -p /dev/ttyUSBL
 }
 
 f16c() {
 	cd $REPOS/faraday-tools
 	source venv/bin/activate
 	clear
-	python AirTools/flash.py -f $FARADAY_PATH/.build/de16-case/dv1 -p /dev/ttyUSBC0
+	python AirTools/flash.py -f $FARADAY_PATH/.build/de16-case/pv1 -p /dev/ttyUSBC0
 }
 
 _sl14l() {
@@ -253,14 +237,14 @@ sl14r() {
 	cd $REPOS/faraday-tools
 	source venv/bin/activate
 	clear
-	nohup python3 ./AirTools/gui/main.py -d $FARADAY_PATH/.build/dh14/mp1_right -p /dev/ttyUSB1
+	nohup python3 ./AirTools/gui/main.py -d $FARADAY_PATH/.build/dh14/mp1_right -p "/dev/ttyUSB1" &
 }
 
 sl14l() {
 	cd $REPOS/faraday-tools
 	source venv/bin/activate
 	clear
-	nohup python3 ./AirTools/gui/main.py -d $FARADAY_PATH/.build/dh14/mp1_left -p /dev/ttyUSB0
+	nohup python3 ./AirTools/gui/main.py -d $FARADAY_PATH/.build/dh14/mp1_left -p "/dev/ttyUSB0" &
 }
 
 _sl14lf() {
@@ -281,42 +265,56 @@ _sl16r() {
 	cd $REPOS/faraday-tools
 	source venv/bin/activate
 	clear
-	python AirTools/syslog.py -d "$FARADAY_PATH/.build/de16/dv1" --showdsp -p "/dev/ttyUSBR" $*
+	python AirTools/syslog.py -d "$FARADAY_PATH/.build/de16/pv1" --showdsp -p "/dev/ttyUSBR" $*
 }
 
 sl16r() {
 	cd $REPOS/faraday-tools
 	source venv/bin/activate
 	clear
-	nohup python3 ./AirTools/gui/main.py -d "$FARADAY_PATH/.build/de16/dv1" -p "/dev/ttyUSBR" &
+	nohup python3 ./AirTools/gui/main.py -d "$FARADAY_PATH/.build/de16/pv1" -p "/dev/ttyUSBR" &
+}
+
+sl16rf() {
+	cd $REPOS/faraday-tools
+	source venv/bin/activate
+	clear
+	nohup python3 ./AirTools/gui/main.py -d "$FARADAY_PATH/.build/de16/pv1_factory" -p "/dev/ttyUSBR" &
 }
 
 _sl16l() {
 	cd $REPOS/faraday-tools
 	source venv/bin/activate
 	clear
-	python AirTools/syslog.py -d "$FARADAY_PATH/.build/de16/dv1" --showdsp -p "/dev/ttyUSBL" $*
+	python AirTools/syslog.py -d "$FARADAY_PATH/.build/de16/pv1" --showdsp -p "/dev/ttyUSBL" $*
 }
 
 sl16l() {
 	cd $REPOS/faraday-tools
 	source venv/bin/activate
 	clear
-	nohup python3 ./AirTools/gui/main.py -d "$FARADAY_PATH/.build/de16/dv1" -p "/dev/ttyUSBL" &
+	nohup python3 ./AirTools/gui/main.py -d "$FARADAY_PATH/.build/de16/pv1" -p "/dev/ttyUSBL" &
+}
+
+sl16lf() {
+	cd $REPOS/faraday-tools
+	source venv/bin/activate
+	clear
+	nohup python3 ./AirTools/gui/main.py -d "$FARADAY_PATH/.build/de16/pv1_factory" -p "/dev/ttyUSBL" &
 }
 
 _sl16c() {
 	cd $REPOS/faraday-tools
 	source venv/bin/activate
 	clear
-	python AirTools/syslog.py -d "$FARADAY_PATH/.build/de16-case/dv1" --showdsp -p "/dev/ttyUSBC0" $*
+	python AirTools/syslog.py -d "$FARADAY_PATH/.build/de16-case/pv1" --showdsp -p "/dev/ttyUSBC0" $*
 }
 
 sl16c() {
 	cd $REPOS/faraday-tools
 	source venv/bin/activate
 	clear
-	nohup python3 ./AirTools/gui/main.py -d $FARADAY_PATH/.build/de16-case/dv1 -p /dev/ttyUSBC0 &
+	nohup python3 ./AirTools/gui/main.py -d $FARADAY_PATH/.build/de16-case/pv1 -p /dev/ttyUSBC0 &
 }
 
 _sl14rf() {
@@ -324,27 +322,6 @@ _sl14rf() {
 	source venv/bin/activate
 	clear
 	python AirTools/syslog.py -d "$FARADAY_PATH/.build/dh14/mp1_right_factory" -p "/dev/ttyUSB1" -b 3000000 $*
-}
-
-function set_sn() {
-	cd $REPOS/faraday-tools
-	source venv/bin/activate
-  python AirTools/nvkey.py set 0xB001 $1 -p /dev/ttyUSB0 -b 3000000
-  python AirTools/nvkey.py set 0xB001 $1 -p /dev/ttyUSB1 -b 3000000
-}
-
-function set_name() {
-	cd $REPOS/faraday-tools
-	source venv/bin/activate
-  python AirTools/nvkey.py set 0x3901 $1 -p /dev/ttyUSB0 -b 3000000
-  python AirTools/nvkey.py set 0xF202 $1 -p /dev/ttyUSB0 -b 3000000
-  python AirTools/nvkey.py set 0x3901 $1 -p /dev/ttyUSB1 -b 3000000
-  python AirTools/nvkey.py set 0xF202 $1 -p /dev/ttyUSB1 -b 3000000
-}
-
-function ble_tool() {
-	cd $REPOS/baldwin-protobuf/baldwin-ble-tool
-	python baldwinGenericCommander.py --scan
 }
 
 function ota() {
@@ -357,18 +334,6 @@ function proto() {
 	cd $REPOS/baldwin-protobuf/baldwin-ble-tool
 	source venv/bin/activate
 	python baldwinGenericCommander.py --scan
-}
-
-function setup_dh14() {
-	SN="37191540"
-	echo -e "┌────────────────────────────────┐"
-	echo -e "│ ${BCYAN}STEP 1/2 - Set Serial number${NC}   │"
-	echo -e "└────────────────────────────────┘"
-	set_sn $SN
-	echo -e "┌───────────────────────┐"
-	echo -e "│ ${BCYAN}STEP 1/2 - Set Name${NC}   │"
-	echo -e "└───────────────────────┘"
-	set_name "Beoplay H100 🐷"
 }
 
 ###########################################
@@ -458,3 +423,5 @@ if type rg &> /dev/null; then
   export FZF_DEFAULT_COMMAND='rg --files'
   export FZF_DEFAULT_OPTS='-m'
 fi
+
+eval "$(zellij setup --generate-auto-start zsh)"
