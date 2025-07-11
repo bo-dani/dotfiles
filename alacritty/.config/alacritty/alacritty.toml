@@ -3,6 +3,10 @@ import = [
     "~/.config/alacritty/themes/themes/oceanic_next.toml"
 ]
 
+[terminal.shell]
+program = "zellij"
+args = ["-l", "welcome"]
+
 [[keyboard.bindings]]
 action = "Paste"
 key = "V"
@@ -135,6 +139,8 @@ style = "Regular"
 
 [window]
 title = "Alacritty"
+startup_mode = "Maximized"
+opacity = 0.9
 
 [window.class]
 general = "Alacritty"

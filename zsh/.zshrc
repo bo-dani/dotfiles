@@ -424,4 +424,3 @@ if type rg &> /dev/null; then
   export FZF_DEFAULT_OPTS='-m'
 fi
 
-eval "$(zellij setup --generate-auto-start zsh)"
