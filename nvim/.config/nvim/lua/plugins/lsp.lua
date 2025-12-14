@@ -1,7 +1,7 @@
 return {
   "neovim/nvim-lspconfig",
   dependencies = {
-    "williamboman/mason-lspconfig.nvim",
+    "mason-org/mason-lspconfig.nvim",
   },
   opts = {
     servers = {
@@ -11,12 +11,12 @@ return {
           "--pretty",
           "--background-index=false",
           "--suggest-missing-includes",
-          "--query-driver=/usr/gcc-13.3/bin",
+          "--query-driver=/usr/share/arm-gnu-toolchain-14.2.rel1-x86_64-arm-none-eabi/bin/arm-none-eabi-gcc,/usr/share/arm-gnu-toolchain-14.2.rel1-x86_64-arm-none-eabi/bin/arm-none-eabi-g++",
           "-j=1",
           "--clang-tidy",
           "--compile-commands-dir=.build",
         },
-        filetypes = { "c", "cpp", "proto" },
+        filetypes = { "c", "cpp", "hpp" },
         on_attach = function(client, bufnr)
           if client.server_capabilities.inlayHintProvider then
             vim.lsp.inlay_hint.enable(true, nil)

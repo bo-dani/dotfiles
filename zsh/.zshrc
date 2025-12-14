@@ -9,6 +9,7 @@ source $HOME/.secrets
 
 # Path to your oh-my-zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
+export GCM_CREDENTIAL_STORE="plaintext"
 
 # Web browser
 export BROWSER=""
@@ -20,7 +21,7 @@ export REPOS="$HOME/repos"
 export FARADAY_PATH="$HOME/repos/faraday"
 
 # PYTHONPATH
-export PYTHONPATH="$PYTHONPATH:$REPOS/faraday-tools:$REPOS/faraday-tools/external/dtbt"
+export PYTHONPATH="$PYTHONPATH:$REPOS/faraday-tools:$REPOS/faraday-tools/external/dtbt/python"
 
 # PATH
 export PATH="$PATH:$HOME/.local/bin/:$HOME/.local/scripts/"
@@ -74,8 +75,8 @@ ZSH_THEME="agnoster"
 plugins=(
 	command-not-found
 	fzf
-  safe-paste
-  ubuntu
+    safe-paste
+    ubuntu
 	pip
 	rust
 	sudo
@@ -85,7 +86,7 @@ plugins=(
 	zsh-syntax-highlighting
 	# zsh-autocomplete
 	themes
-  docker
+    docker
 )
 
 source $ZSH/oh-my-zsh.sh
@@ -160,9 +161,9 @@ gcam() {
 ####             FARADAY               ####
 ###########################################
 
-b14() {
+b20() {
 	cd $REPOS/faraday
-	./faraday.py build --product dh14 --build mp1_right && ./faraday.py build --product dh14 --build mp1_left
+	./faraday.py build --product dh20 --build evk
 	sed -i 's/\/workspaces/\/home\/dama\/repos/g' .build/compile_commands.json
 	sed -i 's/-fno-tree-dominator-opts//' .build/compile_commands.json
 }
@@ -188,19 +189,18 @@ b16c() {
 	sed -i 's/-fno-tree-dominator-opts//' .build/compile_commands.json
 }
 
-b14f() {
+b20f() {
 	cd $REPOS/faraday
-	./faraday.py build --product dh14 --build mp1_right --factory && ./faraday.py build --product dh14 --build mp1_left --factory
+	./faraday.py build --product dh14 --build evk --factory
 	sed -i 's/\/workspaces/\/home\/dama\/repos/g' .build/compile_commands.json
 	sed -i 's/-fno-tree-dominator-opts//' .build/compile_commands.json
 }
 
-f14() {
+f20() {
 	cd $REPOS/faraday-tools
 	source venv/bin/activate
 	clear
-	python AirTools/flash.py -f $FARADAY_PATH/.build/dh14/mp1_left -p /dev/ttyUSB0 && \
-		python AirTools/flash.py -f $FARADAY_PATH/.build/dh14/mp1_right -p /dev/ttyUSB1
+	python AirTools/flash.py -f $FARADAY_PATH/.build/dh20/evk -p /dev/ttyUSBH
 }
 
 f16() {
@@ -223,42 +223,21 @@ f16c() {
 	cd $REPOS/faraday-tools
 	source venv/bin/activate
 	clear
-	python AirTools/flash.py -f $FARADAY_PATH/.build/de16-case/pv1 -p /dev/ttyUSBC0
+    python AirTools/flash.py -f $FARADAY_PATH/.build/de16-case/pv1 -p /dev/ttyUSBC0
 }
 
-_sl14l() {
+_sl20() {
 	cd $REPOS/faraday-tools
 	source venv/bin/activate
 	clear
-	python AirTools/syslog.py -d "$FARADAY_PATH/.build/dh14/mp1_left" --showdsp -p "/dev/ttyUSB0" $*
+	python AirTools/syslog.py -d "$FARADAY_PATH/.build/dh20/evk" --showdsp -p "/dev/ttyUSBH" $*
 }
 
-sl14r() {
+sl20() {
 	cd $REPOS/faraday-tools
 	source venv/bin/activate
 	clear
-	nohup python3 ./AirTools/gui/main.py -d $FARADAY_PATH/.build/dh14/mp1_right -p "/dev/ttyUSB1" &
-}
-
-sl14l() {
-	cd $REPOS/faraday-tools
-	source venv/bin/activate
-	clear
-	nohup python3 ./AirTools/gui/main.py -d $FARADAY_PATH/.build/dh14/mp1_left -p "/dev/ttyUSB0" &
-}
-
-_sl14lf() {
-	cd $REPOS/faraday-tools
-	source venv/bin/activate
-	clear
-	python AirTools/syslog.py -d "$FARADAY_PATH/.build/dh14/mp1_left_factory" -p "/dev/ttyUSB0" $*
-}
-
-_sl14r() {
-	cd $REPOS/faraday-tools
-	source venv/bin/activate
-	clear
-	python AirTools/syslog.py -d "$FARADAY_PATH/.build/dh14/mp1_right" --showdsp -p "/dev/ttyUSB1" $*
+	nohup python3 ./AirTools/gui/main.py -d $FARADAY_PATH/.build/dh20/evk -p "/dev/ttyUSBH" &
 }
 
 _sl16r() {
@@ -315,13 +294,6 @@ sl16c() {
 	source venv/bin/activate
 	clear
 	nohup python3 ./AirTools/gui/main.py -d $FARADAY_PATH/.build/de16-case/pv1 -p /dev/ttyUSBC0 &
-}
-
-_sl14rf() {
-	cd $REPOS/faraday-tools
-	source venv/bin/activate
-	clear
-	python AirTools/syslog.py -d "$FARADAY_PATH/.build/dh14/mp1_right_factory" -p "/dev/ttyUSB1" -b 3000000 $*
 }
 
 function ota() {
