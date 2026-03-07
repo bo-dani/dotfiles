@@ -1,0 +1,5 @@
+[user]
+	email = dama@bang-olufsen.dk
+	name = Daniel Mancebo
+[credential]
+	helper = store
