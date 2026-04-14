@@ -8,7 +8,7 @@ return {
         explorer = {
           hidden = true,
           ignored = false,
-          exclude = { ".git" },
+          exclude = { ".git", ".build" },
           include = { 
             "src/airoha_sdk"
           }

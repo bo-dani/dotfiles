@@ -25,5 +25,7 @@ return {
   { "brentyi/isort.vim" },
   { "github/copilot.vim" },
   { "CopilotC-Nvim/CopilotChat.nvim" },
-  { "shortcuts/no-neck-pain.nvim" }
+  { "shortcuts/no-neck-pain.nvim" },
+  { "letieu/jira.nvim" },
+  { "pwntester/octo.nvim" }
 }

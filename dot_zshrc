@@ -18,7 +18,7 @@ export EDITOR=nvim
 
 # Repos folder
 export REPOS="$HOME/repos"
-export FARADAY_PATH="$HOME/repos/faraday"
+export FARADAY_PATH="$HOME/repos/beo-airoha"
 
 # PYTHONPATH
 export PYTHONPATH="$PYTHONPATH:$REPOS/faraday-tools:$REPOS/faraday-tools/external/dtbt/python"
@@ -162,57 +162,17 @@ gcam() {
 ###########################################
 
 b20() {
-	cd $REPOS/faraday
+	cd $FARADAY_PATH
 	source venv/bin/activate
 	python faraday.py build --product dh20 --build evk
 	sed -i 's/\/workspaces/\/home\/dama\/repos/g' .build/compile_commands.json
 	sed -i 's/-fno-tree-dominator-opts//' .build/compile_commands.json
 }
 
-b16() {
-	cd $REPOS/faraday
-	source venv/bin/activate
-	python faraday.py build --product de16 --build pv1
-	sed -i 's/\/workspaces/\/home\/dama\/repos/g' .build/compile_commands.json
-	sed -i 's/-fno-tree-dominator-opts//' .build/compile_commands.json
-}
-
-b14r() {
-	cd $REPOS/faraday
-	source venv/bin/activate
-	python faraday.py build --product dh14 --build mp1_right
-	sed -i 's/\/workspaces/\/home\/dama\/repos/g' .build/compile_commands.json
-	sed -i 's/-fno-tree-dominator-opts//' .build/compile_commands.json
-}
-
-b14l() {
-	cd $REPOS/faraday
-	source venv/bin/activate
-	python faraday.py build --product dh14 --build mp1_left
-	sed -i 's/\/workspaces/\/home\/dama\/repos/g' .build/compile_commands.json
-	sed -i 's/-fno-tree-dominator-opts//' .build/compile_commands.json
-}
-
-b16f() {
-	cd $REPOS/faraday
-	source venv/bin/activate
-	python faraday.py build --product de16 --build pv1 --factory
-	sed -i 's/\/workspaces/\/home\/dama\/repos/g' .build/compile_commands.json
-	sed -i 's/-fno-tree-dominator-opts//' .build/compile_commands.json
-}
-
-b16c() {
-	cd $REPOS/faraday
-	source venv/bin/activate
-	python faraday.py build --product de16-case --build pv1
-	sed -i 's/\/workspaces/\/home\/dama\/repos/g' .build/compile_commands.json
-	sed -i 's/-fno-tree-dominator-opts//' .build/compile_commands.json
-}
-
 b20f() {
-	cd $REPOS/faraday
+	cd $FARADAY_PATH
 	source venv/bin/activate
-	python faraday.py build --product dh14 --build evk --factory
+	python faraday.py build --product dh20 --build evk --factory
 	sed -i 's/\/workspaces/\/home\/dama\/repos/g' .build/compile_commands.json
 	sed -i 's/-fno-tree-dominator-opts//' .build/compile_commands.json
 }
@@ -224,34 +184,18 @@ f20() {
 	python AirTools/flash.py -f $FARADAY_PATH/.build/dh20/evk -p /dev/ttyUSBH
 }
 
-f16() {
-	cd $REPOS/faraday-tools
-	source venv/bin/activate
-	clear
-	python AirTools/flash.py -f $FARADAY_PATH/.build/de16/pv1 -p /dev/ttyUSBR && \
-		python AirTools/flash.py -f $FARADAY_PATH/.build/de16/pv1 -p /dev/ttyUSBL
-}
-
-f16f() {
-	cd $REPOS/faraday-tools
-	source venv/bin/activate
-	clear
-	python AirTools/flash.py -f $FARADAY_PATH/.build/de16/pv1_factory -p /dev/ttyUSBR && \
-		python AirTools/flash.py -f $FARADAY_PATH/.build/de16/pv1_factory -p /dev/ttyUSBL
-}
-
-f16c() {
-	cd $REPOS/faraday-tools
-	source venv/bin/activate
-	clear
-    python AirTools/flash.py -f $FARADAY_PATH/.build/de16-case/pv1 -p /dev/ttyUSBC0
-}
-
 _sl20() {
 	cd $REPOS/faraday-tools
 	source venv/bin/activate
 	clear
-	python AirTools/syslog.py -d "$FARADAY_PATH/.build/dh20/evk" --showdsp -p "/dev/ttyUSBH" $*
+	python AirTools/syslog.py -d "$FARADAY_PATH/.build/dh20/evk" -p "/dev/ttyUSBH" $*
+}
+
+_sl20f() {
+	cd $REPOS/faraday-tools
+	source venv/bin/activate
+	clear
+	python AirTools/syslog.py -d "$FARADAY_PATH/.build/dh20/evk_factory" -p "/dev/ttyUSBH" $*
 }
 
 sl20() {
@@ -259,90 +203,6 @@ sl20() {
 	source venv/bin/activate
 	clear
 	nohup python3 ./AirTools/gui/main.py -d $FARADAY_PATH/.build/dh20/evk -p "/dev/ttyUSBH" &
-}
-
-_sl16r() {
-	cd $REPOS/faraday-tools
-	source venv/bin/activate
-	clear
-	python AirTools/syslog.py -d "$FARADAY_PATH/.build/de16/pv1" --showdsp -p "/dev/ttyUSBR" $*
-}
-
-sl16r() {
-	cd $REPOS/faraday-tools
-	source venv/bin/activate
-	clear
-	nohup python3 ./AirTools/gui/main.py -d "$FARADAY_PATH/.build/de16/pv1" -p "/dev/ttyUSBR" &
-}
-
-sl16rf() {
-	cd $REPOS/faraday-tools
-	source venv/bin/activate
-	clear
-	nohup python3 ./AirTools/gui/main.py -d "$FARADAY_PATH/.build/de16/pv1_factory" -p "/dev/ttyUSBR" &
-}
-
-_sl16l() {
-	cd $REPOS/faraday-tools
-	source venv/bin/activate
-	clear
-	python AirTools/syslog.py -d "$FARADAY_PATH/.build/de16/pv1" --showdsp -p "/dev/ttyUSBL" $*
-}
-
-sl16l() {
-	cd $REPOS/faraday-tools
-	source venv/bin/activate
-	clear
-	nohup python3 ./AirTools/gui/main.py -d "$FARADAY_PATH/.build/de16/pv1" -p "/dev/ttyUSBL" &
-}
-
-sl16lf() {
-	cd $REPOS/faraday-tools
-	source venv/bin/activate
-	clear
-	nohup python3 ./AirTools/gui/main.py -d "$FARADAY_PATH/.build/de16/pv1_factory" -p "/dev/ttyUSBL" &
-}
-
-_sl16c() {
-	cd $REPOS/faraday-tools
-	source venv/bin/activate
-	clear
-	python AirTools/syslog.py -d "$FARADAY_PATH/.build/de16-case/pv1" --showdsp -p "/dev/ttyUSBC0" $*
-}
-
-sl16c() {
-	cd $REPOS/faraday-tools
-	source venv/bin/activate
-	clear
-	nohup python3 ./AirTools/gui/main.py -d $FARADAY_PATH/.build/de16-case/pv1 -p /dev/ttyUSBC0 &
-}
-
-_sl14l() {
-	cd $REPOS/faraday-tools
-	source venv/bin/activate
-	clear
-	python AirTools/syslog.py -d "$FARADAY_PATH/.build/dh14/mp1_left" --showdsp -p "/dev/ttyUSBC0" $*
-}
-
-sl14l() {
-	cd $REPOS/faraday-tools
-	source venv/bin/activate
-	clear
-	nohup python3 ./AirTools/gui/main.py -d "$FARADAY_PATH/.build/dh14/mp1_left" -p "/dev/ttyUSBC0" &
-}
-
-_sl14r() {
-	cd $REPOS/faraday-tools
-	source venv/bin/activate
-	clear
-	python AirTools/syslog.py -d "$FARADAY_PATH/.build/dh14/mp1_right" --showdsp -p "/dev/ttyUSBC1" $*
-}
-
-sl14r() {
-	cd $REPOS/faraday-tools
-	source venv/bin/activate
-	clear
-	nohup python3 ./AirTools/gui/main.py -d "$FARADAY_PATH/.build/dh14/mp1_right" -p "/dev/ttyUSBC1" &
 }
 
 function ota() {
@@ -453,3 +313,5 @@ source ~/powerlevel10k/powerlevel10k.zsh-theme
 
 # opencode
 export PATH=/home/dama/.opencode/bin:$PATH
+# dtbt
+export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$REPOS/faraday-tools/external/dtbt/python/build/linux/x86_64/python312

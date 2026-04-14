@@ -6,6 +6,7 @@ return {
       "black",    -- Formatter
       "flake8",   -- Linter
       "mypy",     -- Type checker
+      "pydocstyle",
       "isort",
       "pylint",
     })
