@@ -1,5 +1,5 @@
 layout {
-    cwd "/home/dama"
+    cwd "/home/dama/repos/beo-airoha"
     tab name="Code" hide_floating_panes=true {
         pane size=1 borderless=true {
             plugin location="zellij:tab-bar"
@@ -13,7 +13,7 @@ layout {
             }
             pane {
                 command "zsh"
-                args "source venv/bin/activate && /snap/bin/nvim ."
+                args "-c" "source venv/bin/activate && /snap/bin/nvim ."
                 cwd "/home/dama/repos/beo-airoha"
                 size "60%"
                 start_suspended true
@@ -29,15 +29,15 @@ layout {
         }
         pane split_direction="vertical" {
             pane {
-                cwd "/home/dama/repos/faraday-tools"
+                cwd "/home/dama/repos/beo-airoha/faraday-tools"
                 command "/home/dama/.opencode/bin/opencode"
                 size "40%"
                 start_suspended true
             }
             pane {
-                cwd "/home/dama/repos/faraday-tools"
+                cwd "/home/dama/repos/beo-airoha/faraday-tools"
                 command "zsh"
-                args "source venv/bin/activate && /snap/bin/nvim ."
+                args "-c" "source venv/bin/activate && /snap/bin/nvim ."
                 size "60%"
                 start_suspended true
             }
@@ -51,8 +51,8 @@ layout {
             plugin location="zellij:tab-bar"
         }
         pane split_direction="vertical" {
-            pane cwd="repos/faraday-tools" size="50%"
-            pane cwd="repos/faraday-tools" size="50%"
+            pane cwd="repos/beo-airoha/faraday-tools" size="50%"
+            pane cwd="repos/beo-airoha/faraday-tools" size="50%"
         }
         pane size=1 borderless=true {
             plugin location="zellij:status-bar"

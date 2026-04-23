@@ -5,13 +5,20 @@ return {
   opts = {
     picker = {
       sources = {
+        grep = {
+          hidden = true,
+          ignored = true,
+          exclude = { ".git", ".build", ".pytest_cache", "__pycache__", "venv" },
+        },
+        files = {
+          hidden = true,
+          ignored = true,
+          exclude = { ".git", ".build", ".pytest_cache", "__pycache__", "venv" },
+        },
         explorer = {
           hidden = true,
-          ignored = false,
-          exclude = { ".git", ".build" },
-          include = { 
-            "src/airoha_sdk"
-          }
+          ignored = true,
+          exclude = { ".git", ".build", ".pytest_cache", "__pycache__", "venv" },
         },
       },
       layout = {
@@ -25,4 +32,3 @@ return {
     },
   },
 }
-
