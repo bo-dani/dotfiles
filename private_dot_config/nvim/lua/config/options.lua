@@ -3,6 +3,7 @@
 -- Add any additional options here
 
 vim.g.lazyvim_picker = "snacks"
+vim.g.snacks_animate = false
 
 -- 4-space tabs
 vim.o.tabstop = 4 -- A TAB character looks like 4 spaces

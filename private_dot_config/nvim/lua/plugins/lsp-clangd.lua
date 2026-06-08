@@ -9,12 +9,11 @@ return {
         cmd = {
           "clangd",
           "--pretty",
-          "--background-index=false",
-          "--suggest-missing-includes",
-          "--query-driver=/usr/gcc-13.3/bin",
-          "-j=1",
+          "--header-insertion=never",
+          "-j=2",
+          "--query-driver=/home/dama/repos/mozart/sdk/**/*-mozart-linux-g++,/home/dama/repos/mozart/sdk/**/*-mozart-linux-gcc",
           "--clang-tidy",
-          "--compile-commands-dir=.build",
+          "--compile-commands-dir=.",
         },
         filetypes = { "c", "cpp", "proto" },
         on_attach = function(client, bufnr)

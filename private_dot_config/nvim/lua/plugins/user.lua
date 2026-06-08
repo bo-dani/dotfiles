@@ -27,5 +27,7 @@ return {
   { "CopilotC-Nvim/CopilotChat.nvim" },
   { "shortcuts/no-neck-pain.nvim" },
   { "letieu/jira.nvim" },
-  { "pwntester/octo.nvim" }
+  { "pwntester/octo.nvim" },
+  { "EthanJWright/vs-tasks.nvim" }
+  -- { "google/vim-coverage" }
 }

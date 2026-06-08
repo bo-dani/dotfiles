@@ -2,19 +2,28 @@
 -- Default keymaps that are always set: https://github.com/LazyVim/LazyVim/blob/main/lua/lazyvim/config/keymaps.lua
 -- Add any additional keymaps here
 
+local map = vim.keymap.set
+
 -- Buffer jumping
 for i = 1, 9 do
-  vim.keymap.set("n", "<leader>" .. i, ":LualineBuffersJump " .. i .. "<CR>", { silent = true, desc = "Jump to buffer " .. i })
+  map("n", "<leader>" .. i, ":LualineBuffersJump " .. i .. "<CR>", { silent = true, desc = "Jump to buffer " .. i })
 end
-vim.keymap.set("n", "<leader>h", ":bprev<CR>", { silent = true, desc = "Previous buffer" })
-vim.keymap.set("n", "<leader>l", ":bnext<CR>", { silent = true, desc = "Next buffer" })
+map("n", "<leader>h", ":bprev<CR>", { silent = true, desc = "Previous buffer" })
+map("n", "<leader>l", ":bnext<CR>", { silent = true, desc = "Next buffer" })
 
 -- Zen Mode
 local zen = require('zen-mode')
-vim.keymap.set('n', '<leader>z', zen.toggle, { silent = true, desc = "Toggle Zen mode" })
+map('n', '<leader>z', zen.toggle, { silent = true, desc = "Toggle Zen mode" })
 
 -- jk as ESC 
-vim.keymap.set('i', 'kj', '<esc>', { silent = true, desc = "Remap ESC" })
+map('i', 'kj', '<esc>', { silent = true, desc = "Remap ESC" })
+
+-- vs-code-like tasks
+map("n", "<Leader>ta", function() require("vstask").tasks() end, { desc = "VS Tasks" })
+map("n", "<Leader>ti", function() require("vstask").inputs() end, { desc = "VS Inputs" })
+map("n", "<Leader>tj", function() require("vstask").jobs() end, { desc = "VS Jobs" })
+map("n", "<Leader>tl", function() require("vstask").launches() end, { desc = "VS Launches" })
+map("n", "<Leader>tr", function() require("vstask").command() end, { desc = "VS Run Command" })
 
 -- LSP
 vim.api.nvim_create_autocmd("LspAttach", {

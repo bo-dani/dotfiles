@@ -24,7 +24,7 @@ export FARADAY_PATH="$HOME/repos/beo-airoha"
 export PYTHONPATH="$PYTHONPATH:$FARADAY_PATH/faraday-tools:$FARADAY_PATH/faraday-tools/external/dtbt/python"
 
 # PATH
-export PATH="$PATH:$HOME/.local/bin/:$HOME/.local/scripts/"
+export PATH="$HOME/.local/bin:$HOME/.local/scripts:$PATH"
 
 export FZF_BASE="/usr/bin"
 
@@ -254,24 +254,11 @@ alias gsuir='git submodule update --init --recursive'
 alias gsur='git submodule update --recursive'
 alias gaa='git add .'
 alias gnah='git restore .'
-alias grs='git restore --staged .'
 alias gpush='git push'
 alias gpull='git pull'
 alias gfa='git fetch --all --prune'
 alias gl="git log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold cyan)%aD%C(reset) %C(bold green)(%ar)%C(reset)%C(bold yellow)%d%C(reset)%n''          %C(white)%s%C(reset) %C(dim white)- %an%C(reset)' --branches"
 alias gmc="git merge --continue"
-alias gma="git merge --abort"
-alias grb="git rebase"
-alias grbc="git rebase --continue"
-alias grba="git rebase --abort"
-
-alias get_idf='. $HOME/repos/esp-idf/export.sh'
-
-grbb() {
-	git reset $(git merge-base master $(git branch --show-current))
-}
-
-alias pof="shutdown now"
 
 alias pipins="python -m pip install"
 alias pipupg="python -m pip install --upgrade pip"
