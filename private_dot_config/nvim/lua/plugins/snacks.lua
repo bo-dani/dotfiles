@@ -15,7 +15,7 @@ return {
             wrap = true,
           },
           hidden = true,
-          exclude = { 
+          exclude = {
             ".git",
             ".build",
             ".pytest_cache",
@@ -23,11 +23,12 @@ return {
             "venv",
             "sdk",
             "images",
+            "zephyr",
           },
         },
         files = {
           hidden = true,
-          exclude = { 
+          exclude = {
             ".git",
             ".build",
             ".pytest_cache",
@@ -35,11 +36,12 @@ return {
             "venv",
             "sdk",
             "images",
+            "zephyr",
           },
         },
         explorer = {
           hidden = true,
-          exclude = { 
+          exclude = {
             ".git",
             ".build",
             ".pytest_cache",
@@ -47,6 +49,7 @@ return {
             "venv",
             "sdk",
             "images",
+            "zephyr",
           },
         },
       },

@@ -18,10 +18,7 @@ export EDITOR=nvim
 
 # Repos folder
 export REPOS="$HOME/repos"
-export FARADAY_PATH="$HOME/repos/beo-airoha"
-
-# PYTHONPATH
-export PYTHONPATH="$PYTHONPATH:$FARADAY_PATH/faraday-tools:$FARADAY_PATH/faraday-tools/external/dtbt/python"
+export MOZART_PATH="$HOME/repos/mozart"
 
 # PATH
 export PATH="$HOME/.local/bin:$HOME/.local/scripts:$PATH"
@@ -158,69 +155,30 @@ gcam() {
 }
 
 ###########################################
-####             FARADAY               ####
+####             MOZART                ####
 ###########################################
 
-b20() {
-	cd $FARADAY_PATH
-	source venv/bin/activate
-	python faraday.py build --product dh20 --build evk
-	sed -i 's/\/workspaces/\/home\/dama\/repos/g' .build/compile_commands.json
-	sed -i 's/-fno-tree-dominator-opts//' .build/compile_commands.json
+ccx() {
+	cd $MOZART_PATH
+	./setup.sh -t x86 -d 127.0.0.1 -j 8
+	./build.sh -x all -t debug
 }
 
-b20f() {
-	cd $FARADAY_PATH
-	source venv/bin/activate
-	python faraday.py build --product dh20 --build evk --factory
-	sed -i 's/\/workspaces/\/home\/dama\/repos/g' .build/compile_commands.json
-	sed -i 's/-fno-tree-dominator-opts//' .build/compile_commands.json
+cci() {
+	cd $MOZART_PATH
+	./setup.sh -t imx -d 127.0.0.1 -j 8
+	./build.sh -i all -t debug
 }
 
-f20() {
-	cd $FARADAY_PATH/faraday-tools
-	source venv/bin/activate
-	clear
-	python AirTools/flash.py -f $FARADAY_PATH/.build/dh20/evk -p /dev/ttyUSBH
+ut() {
+	cd $MOZART_PATH
+	./setup.sh -t x86 -d 127.0.0.1 -j 8
+	./build.sh -x do_ctest_all -t debug
 }
 
-_sl20() {
-	cd $FARADAY_PATH/faraday-tools
-	source venv/bin/activate
-	clear
-	python AirTools/syslog.py -d "$FARADAY_PATH/.build/dh20/evk" -p "/dev/ttyUSBH" $*
-}
-
-_sl20f() {
-	cd $FARADAY_PATH/faraday-tools
-	source venv/bin/activate
-	clear
-	python AirTools/syslog.py -d "$FARADAY_PATH/.build/dh20/evk_factory" -p "/dev/ttyUSBH" $*
-}
-
-sl20() {
-	cd $FARADAY_PATH/faraday-tools
-	source venv/bin/activate
-	clear
-	nohup python3 ./AirTools/gui/main.py -d $FARADAY_PATH/.build/dh20/evk -p "/dev/ttyUSBH" &
-}
-
-function ota() {
-	cd $REPOS/baldwin-protobuf/baldwin-ble-tool
-	source venv/bin/activate
-  python baldwinOTA.py --scan -f $*
-}
-
-function proto() {
-	cd $REPOS/baldwin-protobuf/baldwin-ble-tool
-	source venv/bin/activate
-	python baldwinGenericCommander.py --scan
-}
-
-function proto-usb() {
-	cd $REPOS/baldwin-protobuf/baldwin-ble-tool
-	source venv/bin/activate
-	python baldwinGenericCommander.py --usb
+cov() {
+	cd $MOZART_PATH
+	./scripts/coverage/run_coverage.sh
 }
 
 ###########################################
@@ -230,8 +188,7 @@ function proto-usb() {
 alias ..='cd ..'
 
 alias repos='cd $REPOS'
-alias fa='cd $FARADAY_PATH && source venv/bin/activate'
-alias fat='cd $FARADAY_PATH/faraday-tools && source venv/bin/activate'
+alias moz='cd $MOZART_PATH'
 
 alias ls='exa --icons --color=always --group-directories-first'
 alias la='exa -a --icons --color=always --group-directories-first'
@@ -300,5 +257,3 @@ source ~/powerlevel10k/powerlevel10k.zsh-theme
 
 # opencode
 export PATH=/home/dama/.opencode/bin:$PATH
-# dtbt
-export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$FARADAY_PATH/faraday-tools/external/dtbt/python/build/linux/x86_64/python312
