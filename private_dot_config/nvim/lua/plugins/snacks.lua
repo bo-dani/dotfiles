@@ -23,7 +23,6 @@ return {
             "venv",
             "sdk",
             "images",
-            "zephyr",
           },
         },
         files = {
@@ -36,7 +35,6 @@ return {
             "venv",
             "sdk",
             "images",
-            "zephyr",
           },
         },
         explorer = {
@@ -49,7 +47,6 @@ return {
             "venv",
             "sdk",
             "images",
-            "zephyr",
           },
         },
       },

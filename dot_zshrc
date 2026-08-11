@@ -95,7 +95,7 @@ bindkey '^[[Z' autosuggest-accept  # shift + tab  | autosuggest
 bindkey -s ^f "tmux-sessionizer\n"
 
 # Use bat for the man pages.
-export MANPAGER="sh -c 'col -bx | bat -l man -p'"
+export MANPAGER="sh -c 'sed -e s/.\\\\x08//g | bat -l man -p'"
 
 ###########################################
 ####            FUNCTIONS              ####
@@ -112,12 +112,11 @@ goto() {
 }
 
 of() {
-	fd . $HOME --color=always --type=file --hidden --exclude=.cargo --exclude=opt --exclude=.cache | \
+	fd . --color=always --type=file --hidden --exclude=.cargo --exclude=opt --exclude=.cache | \
 		fzf -i --ansi --border --preview 'bat --color=always {}' | xargs -ro $EDITOR
 }
 
-# Open folder with code
-odc() {
+od() {
 	fd . $REPOS --color=always --type=directory | \
 		fzf -i --ansi --border --preview 'exa -al --icons --color=always --group-directories-first {}' | xargs -ro $EDITOR
 }
@@ -164,10 +163,17 @@ ccx() {
 	./build.sh -x all -t debug
 }
 
+export LEVEL_IP="192.168.0.166"
+
 cci() {
 	cd $MOZART_PATH
-	./setup.sh -t imx -d 127.0.0.1 -j 8
-	./build.sh -i all -t debug
+	./setup.sh -t imx -d $1 -j 8
+	./build.sh -i all -t relwithdebuginfo
+}
+
+deploy() {
+	cd $MOZART_PATH
+	./build.sh -i do_deploy_image -t relwithdebuginfo
 }
 
 ut() {
