@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "in progress/TBD Department Meeting Presentation.md",
+                "file": "knowledge/Building and Deploying Firmware.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "TBD Department Meeting Presentation"
+              "title": "Building and Deploying Firmware"
             }
           }
         ]
@@ -219,6 +219,9 @@
   },
   "left-ribbon": {
     "hiddenItems": {
+      "callout-manager:Insert Callout": false,
+      "homepage:Open homepage": false,
+      "templater-obsidian:Templater": false,
       "daily-notes:Open today's daily note": false,
       "switcher:Open quick switcher": false,
       "graph:Open graph view": false,
@@ -231,19 +234,19 @@
       "obsidian-excalidraw-plugin:New drawing": false
     }
   },
-  "active": "c8eb8034ab10346c",
+  "active": "e7a7b303c61786dc",
   "lastOpenFiles": [
+    "knowledge/Requirements management.md",
+    "knowledge/Building and Deploying Firmware.md",
+    "in progress/TBD Department Meeting Presentation.md",
     "in progress/S63 Overhaul.md",
     "in progress/Risk management.md",
     "in progress/Jira overhaul.md",
     "in progress/Goals.md",
-    "in progress/TBD Department Meeting Presentation.md",
     "knowledge/SWIP.md",
-    "knowledge/Building and Deploying Firmware.md",
     "knowledge/Kernel development.md",
     "knowledge/V-Model.md",
     "knowledge/Estimations.md",
-    "knowledge/Requirements management.md",
     "journal/2026-07-23.md",
     "journal/2026-07-16.md",
     "journal/2026-07-15.md",
