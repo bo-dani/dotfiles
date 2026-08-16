@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "knowledge/Building and Deploying Firmware.md",
+                "file": "miniatures painting/Airbrushing.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Building and Deploying Firmware"
+              "title": "Airbrushing"
             }
           }
         ]
@@ -89,7 +89,8 @@
       }
     ],
     "direction": "horizontal",
-    "width": 952.5
+    "width": 599.30078125,
+    "collapsed": true
   },
   "right": {
     "id": "064cb32df58cacc5",
@@ -215,7 +216,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 483.5
+    "width": 200
   },
   "left-ribbon": {
     "hiddenItems": {
@@ -236,8 +237,13 @@
   },
   "active": "e7a7b303c61786dc",
   "lastOpenFiles": [
-    "knowledge/Requirements management.md",
+    "miniatures painting/Basing.md",
+    "miniatures painting/Airbrushing.md",
+    "miniatures painting/Paints and colors.md",
+    "miniatures painting",
+    "woodworking",
     "knowledge/Building and Deploying Firmware.md",
+    "knowledge/Requirements management.md",
     "in progress/TBD Department Meeting Presentation.md",
     "in progress/S63 Overhaul.md",
     "in progress/Risk management.md",
@@ -260,18 +266,14 @@
     "Untitled.md",
     "journal/Journal - 2026-07-14.md",
     "journal",
-    "minutes/Untitled.md",
     "minutes",
-    "templates/Minutes Template.md",
     "templates",
-    "excalidraw/SWIP Overview.excalidraw.md",
     "knowledge/SWIP Overview.canvas",
     "excalidraw",
     "in progress",
     "knowledge",
     "processes",
     "Untitled.canvas",
-    "copilot/copilot-custom-prompts",
-    "copilot"
+    "copilot/copilot-custom-prompts"
   ]
 }
